@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\mngr\LoginController;
+use App\Http\Controllers\mngr\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +17,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('mngr.login');
+})->name('auth');
+
+Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('login');
+
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+
