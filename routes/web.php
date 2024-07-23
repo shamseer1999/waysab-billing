@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\mngr\LoginController;
 use App\Http\Controllers\mngr\DashboardController;
+use App\Http\Controllers\mngr\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,14 @@ Route::get('/', function () {
 
 Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('login');
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->prefix('mngr')->name('mngr.')->group(function(){
 
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    /**admin users */
+    Route::prefix('users')->name('users.')->group(function(){
+        Route::get('/', [AdminUserController::class, 'index'])->name('index');
+    });
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
