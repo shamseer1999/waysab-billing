@@ -19,10 +19,14 @@
                 @if (!empty($results))
                     @foreach ($results as $item)
                         <tr>
-                            <td>{{ $loop->index }}</td>
+                            <td>{{ $loop->index +1 }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
-                            <td></td>
+                            <td>
+                                <a href="{{ route('mngr.users.edit', $item->id) }}" title="Edit">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 @else
