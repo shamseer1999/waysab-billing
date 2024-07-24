@@ -30,6 +30,8 @@ Route::middleware(['auth'])->prefix('mngr')->name('mngr.')->group(function(){
     /**admin users */
     Route::prefix('users')->name('users.')->group(function(){
         Route::get('/', [AdminUserController::class, 'index'])->name('index');
+        Route::get('{id}/edit', [AdminUserController::class, 'edit'])->name('edit');
+        Route::post('/{id}/update', [AdminUserController::class, 'update'])->name('edit.update');
     });
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

@@ -10,4 +10,9 @@ class AdminUserService
     {
         return User::all();
     }
+
+    public function getUserData($user)
+    {
+        return User::find($user);
+    }
 }
